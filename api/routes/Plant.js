@@ -7,31 +7,6 @@ const multer = require('../../utils/multer');
 const checkAuth = require('../middleware/check-auth');
 const dotenv = require('dotenv').config({path:__dirname+'./../../.env'});
 
-//add a new plant
-// router.post('/', upload.single('image') , async (req, res,next) => {
-//     const result = await cloudinary.uploader.upload(req.file.path);
-//     const plant = new Plant({
-//         _id : mongoose.Types.ObjectId(),
-//         name: req.body.name,
-//         p_type:req.body.p_type,
-//         Spacing:req.body.Spacing,
-//         Height:req.body.Height,
-//         Sun_Exposure:req.body.Sun_Exposure,
-//         Water_Requirements:req.body.Water_Requirements,
-//         Temperature:req.body.Temperature,
-//         Soil_Type:req.body.Soil_Type,
-//         Soil_pH:req.body.Soil_pH,
-//         Fertilizer:req.body.Fertilizer,
-//         Harvesting:req.body.Harvesting,
-//         How_To_Plant:req.body.How_To_Plant,
-//         Diseases_Solution:req.body.Diseases_Solution,
-//         plantImage:result.secure_url,
-//         cloudinary_id:result.public_id
-//     });
-//     await plant.save().
-//     then(result1=>{res.status(200).json({message: 'POST Request Handled',createdPlant:result1})
-//     }).catch(err =>{res.status(500).json({error:err})})
-// });
 router.post("/",multer.single("PlantImage"),checkAuth ,  async (req, res) => {
     try {
 
@@ -68,7 +43,6 @@ router.post("/",multer.single("PlantImage"),checkAuth ,  async (req, res) => {
 //get all plants : localhost:3000/plants
 router.get('/', (req, res,next) => {
     Plant.find()
-    .select("name plantImage")
     .exec()
     .then(doc => {
         res.status(200).json(doc);
@@ -102,7 +76,6 @@ router.get('/:plantId', (req, res,next) => {
     const _id = req.params.plantId;
     Plant.findById(_id)
     //select the fields you wan to get in your response
-    .select("_id name Spacing Height Sun_Exposure Water_Requirements Temperature Soil_Type Soil_pH Fertilizer Harvesting Diseases_Solution")
     .exec()
     .then(doc => {
         if(doc){
