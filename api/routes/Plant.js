@@ -55,8 +55,7 @@ router.get('/', (req, res,next) => {
 
 //test
 router.get('/test', (req, res,next) => {
-    
-        res.status(200).json({message:"hello from home"});
+    res.json({message:'hello from pc'})
 });
 
 //find plant by id
