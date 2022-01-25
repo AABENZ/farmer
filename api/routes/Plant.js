@@ -52,6 +52,13 @@ router.get('/', (req, res,next) => {
     })
 });
 
+
+//test
+router.get('/test', (req, res,next) => {
+    
+        res.status(200).json({message:"hello from home"});
+});
+
 //find plant by id
 // get plant by id : localhost:3000/plants/61ed37f2c9d58af8c340ee4c
 router.get('/:plantId', (req, res,next) => {
