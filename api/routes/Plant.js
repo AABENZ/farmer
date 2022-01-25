@@ -7,7 +7,7 @@ const multer = require('../../utils/multer');
 const checkAuth = require('../middleware/check-auth');
 const dotenv = require('dotenv').config({path:__dirname+'./../../.env'});
 
-router.post("/",multer.single("PlantImage"),checkAuth ,  async (req, res) => {
+router.post("/" ,multer.single("PlantImage") ,  async (req, res) => {
     try {
 
       // Upload image to cloudinary
