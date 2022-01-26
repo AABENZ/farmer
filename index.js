@@ -15,7 +15,7 @@ app.use(helmet()); //Helmet helps you secure your Express apps by setting variou
 
 //Database Connection
 mongoose.connect('mongodb+srv://root:root@cluster0.1elqk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',(err,done)=>{
-    if(err) throw err
+    if(err) return console.log('db connection is done')
     if(done) return console.log('db connection is done')
 });
 mongoose.Promise = global.Promise;
