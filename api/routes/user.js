@@ -57,13 +57,13 @@ router.post('/login',(req,res,next) => {
         }
         bcrypt.compare(req.body.password,users[0].password,(err,result) => {
             if(err){
-                return res.status(401).json({message:"auth failed"})
+                return res.status(401).json({message:"wrong email / password"})
             }
             if(result){
                 const token = jwt.sign(
                     { 
                         email: users[0].email,
-                        _id: users[0]._id
+                        password: users[0].password
                     }, 
                     'secret',
                     {
@@ -71,8 +71,10 @@ router.post('/login',(req,res,next) => {
                     }
                     );
                 return res.status(200).json({message:"auth successful",token:token})
+            }else{
+                res.status(401).json({message:"auth failed"})
             }
-            res.status(401).json({message:"auth failed"})
+            
         })
     })
     .catch(err => res.send(500).json({error:err}))
